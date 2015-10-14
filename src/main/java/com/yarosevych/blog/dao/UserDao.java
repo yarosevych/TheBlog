@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +21,17 @@ public class UserDao {
                 "INSERT INTO users (nickname) values (?)");
         preparedStatement.setString(1, nickname);
         preparedStatement.executeUpdate();
-        if (connection != null) {
-            connection.close();
-        }
+        connection.close();
+    }
+
+    public Integer getOrCreateUser(String nickname) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        CallableStatement callableStatement = connection.prepareCall("CALL createOrGetUser(?)");
+        callableStatement.setString(1, nickname);
+        ResultSet resultSet = callableStatement.executeQuery();
+        connection.close();
+        resultSet.next();
+        return resultSet.getInt(1);
     }
 
 
@@ -36,26 +41,8 @@ public class UserDao {
                 "SELECT * FROM users WHERE id=?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if (connection != null) {
             connection.close();
-        }
         return new User(resultSet.getInt(1), resultSet.getString(2));
-    }
-
-    public User getUserByNick(String nickname) throws SQLException {
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT * FROM users WHERE nickname=?");
-        preparedStatement.setString(1, nickname);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (connection != null) {
-            connection.close();
-        }
-        if (!resultSet.next()) {  //also returns false if there are no rows in the ResultSet
-            return null;
-        } else {
-            return new User(resultSet.getInt(1), resultSet.getString(2));
-        }
     }
 
     public List<User> getAllUsers() throws SQLException {
@@ -67,6 +54,7 @@ public class UserDao {
         while (resultSet.next()) {
             users.add(new User(resultSet.getInt(1), resultSet.getString(2)));
         }
+        connection.close();
         return users;
     }
 }

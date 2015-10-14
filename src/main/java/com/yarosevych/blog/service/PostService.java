@@ -22,16 +22,11 @@ public class PostService {
 
     public void addPost(Map<String, String> nickAndPost) throws SQLException {
         String nickname = nickAndPost.get("nickname");
-        User user = userDao.getUserByNick(nickname);
-        if (user == null) {
-            userDao.addUser(nickname);
-            user = userDao.getUserByNick(nickname);
-        }
-
+        Integer userId = userDao.getOrCreateUser(nickname);
         String topic = nickAndPost.get("topic");
         String body = nickAndPost.get("body");
         Post post = new Post(topic, body);
-        post.setUserId(user.getId());
+        post.setUserId(userId);
         postDao.addPost(post);
     }
 
