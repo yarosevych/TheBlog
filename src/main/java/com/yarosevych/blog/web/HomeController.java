@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.HtmlUtils;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,26 +20,17 @@ public class HomeController {
     @Autowired
     private PostService postService;
 
-    @Autowired
-    private UserService userService;
-
-    @RequestMapping("/posts")
+    @RequestMapping("/")
     public String getAllPosts(Map<String, Object> map) throws SQLException{
-        List<Post> escapedPosts = postService.getAllPosts();
-        for(Post post : escapedPosts) {
+        List<Post> posts= postService.getAllPosts();
+        List<Post> escapedPosts = new ArrayList<>();
+        for(Post post : posts) {
             post.setTopic(HtmlUtils.htmlEscape(post.getTopic()));
             post.setBody(HtmlUtils.htmlEscape(post.getBody()));
+            escapedPosts.add(post);
         }
         map.put("postList", escapedPosts);
         map.put("post", new Post());
-
-        List<User> escapedUsers = userService.getallUsers();
-        for(User user : escapedUsers) {
-            user.setNickname(HtmlUtils.htmlEscape(user.getNickname()));
-        }
-        map.put("userList", escapedUsers);
-        map.put("user", new User());
         return "home";
     }
-
 }

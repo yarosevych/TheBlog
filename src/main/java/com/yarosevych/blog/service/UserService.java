@@ -12,10 +12,14 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     public void addUser(String nickname) throws SQLException {
         userDao.addUser(nickname);
+    }
+
+    public User getUserById(Integer id) throws SQLException {
+        return userDao.getUserById(id);
     }
 
     public List<User> getallUsers() throws SQLException {

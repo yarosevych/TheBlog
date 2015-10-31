@@ -24,14 +24,21 @@ public class UserDao {
         connection.close();
     }
 
-    public Integer getOrCreateUser(String nickname) throws SQLException {
+    public User getOrCreateUser(String nickname) throws SQLException {
         Connection connection = dataSource.getConnection();
-        CallableStatement callableStatement = connection.prepareCall("CALL createOrGetUser(?)");
-        callableStatement.setString(1, nickname);
-        ResultSet resultSet = callableStatement.executeQuery();
-        connection.close();
-        resultSet.next();
-        return resultSet.getInt(1);
+        try {
+            CallableStatement callableStatement = connection.prepareCall("CALL createOrGetUser(?)");
+            callableStatement.setString(1, nickname);
+            ResultSet resultSet = callableStatement.executeQuery();
+            User user = new User();
+            if (resultSet.next()) {
+                user.setId(resultSet.getInt(1));
+                user.setNickname(nickname);
+            }
+            return user;
+        } finally {
+            connection.close();
+        }
     }
 
 

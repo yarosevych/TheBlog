@@ -7,21 +7,22 @@ public class Post {
     private String topic;
     private String body;
     private Date postDateTime;
-    private Integer userId;
+    private User user;
 
     public Post(){}
 
-    public Post(String topic, String body) {
+    public Post(String topic, String body, User user) {
         this.topic = topic;
         this.body = body;
+        this.user = user;
     }
 
-    public Post(Integer id, String topic, String body, Date postDateTime, Integer userId) {
+    public Post(Integer id, String topic, String body, Date postDateTime, User user) {
         this.id = id;
         this.topic = topic;
         this.body = body;
         this.postDateTime = postDateTime;
-        this.userId = userId;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -56,11 +57,11 @@ public class Post {
         this.postDateTime = postDateTime;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

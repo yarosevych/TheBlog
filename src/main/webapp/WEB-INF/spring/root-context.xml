@@ -9,6 +9,8 @@
     <context:annotation-config/>
 
     <!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
+
+
     <context:component-scan base-package="com.yarosevych.blog.dao"/>
     <context:component-scan base-package="com.yarosevych.blog.service"/>
 

@@ -8,25 +8,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class PostService {
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     @Autowired
-    PostDao postDao;
+    private PostDao postDao;
 
-    public void addPost(Map<String, String> nickAndPost) throws SQLException {
-        String nickname = nickAndPost.get("nickname");
-        Integer userId = userDao.getOrCreateUser(nickname);
-        String topic = nickAndPost.get("topic");
-        String body = nickAndPost.get("body");
-        Post post = new Post(topic, body);
-        post.setUserId(userId);
+    public static final String NICKNAME = "nickname";
+    public static final String TOPIC = "topic";
+    public static final String BODY = "body";
+
+    public void addPost(Map<String, String> userAndPost) throws SQLException {
+        User user = new User(userAndPost.get(NICKNAME));
+        String topic = userAndPost.get(TOPIC);
+        String body = userAndPost.get(BODY);
+        Post post = new Post(topic, body, user);
         postDao.addPost(post);
     }
 

@@ -7,6 +7,10 @@ public class User {
 
     public User(){}
 
+    public User(String nickname) {
+        this.nickname = nickname;
+    }
+
     public User(Integer id, String nickname) {
         this.id = id;
         this.nickname = nickname;
