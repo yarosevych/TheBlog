@@ -6,17 +6,17 @@ public class Comment {
     private Integer id;
     private String text;
     private Date commentDateTime;
-    private Integer userId;
     private Integer postId;
+    private User user;
 
     public Comment(){}
 
-    public Comment(Integer id, String text, Date commentDateTime, Integer userId, Integer postId) {
+    public Comment(Integer id, String text, Date commentDateTime, Integer postId, User user) {
         this.id = id;
         this.text = text;
         this.commentDateTime = commentDateTime;
-        this.userId = userId;
         this.postId = postId;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -43,19 +43,19 @@ public class Comment {
         this.commentDateTime = commentDateTime;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public Integer getPostId() {
         return postId;
     }
 
     public void setPostId(Integer postId) {
         this.postId = postId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

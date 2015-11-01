@@ -6,12 +6,11 @@ import com.yarosevych.blog.domain.Post;
 import com.yarosevych.blog.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class PostService {
@@ -27,9 +26,9 @@ public class PostService {
     public static final String BODY = "body";
 
     public void addPost(Map<String, String> userAndPost) throws SQLException {
-        User user = new User(userAndPost.get(NICKNAME));
-        String topic = userAndPost.get(TOPIC);
-        String body = userAndPost.get(BODY);
+        User user = new User(HtmlUtils.htmlEscape(userAndPost.get(NICKNAME)));
+        String topic = HtmlUtils.htmlEscape(userAndPost.get(TOPIC));
+        String body = HtmlUtils.htmlEscape(userAndPost.get(BODY));
         Post post = new Post(topic, body, user);
         postDao.addPost(post);
     }

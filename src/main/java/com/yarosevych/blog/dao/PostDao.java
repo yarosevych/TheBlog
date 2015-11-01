@@ -35,14 +35,18 @@ public class PostDao {
             CallableStatement callableStatement = connection.prepareCall("CALL getPostAndUser(?)");
             callableStatement.setInt(1, id);
             ResultSet resultSet = callableStatement.executeQuery();
-            String topic = resultSet.getString(2);
-            String body = resultSet.getString(3);
-            java.util.Date dateTime = resultSet.getTimestamp(4);
-            Integer userId = (resultSet.getInt(5));
-            String nickname = (resultSet.getString(6));
-            User user = new User(userId, nickname);
-            Post post = new Post(id, topic, body, dateTime, user);
-            return post;
+            if (resultSet.next()) {
+                String topic = resultSet.getString(2);
+                String body = resultSet.getString(3);
+                java.util.Date dateTime = resultSet.getTimestamp(4);
+                Integer userId = (resultSet.getInt(5));
+                String nickname = (resultSet.getString(6));
+                User user = new User(userId, nickname);
+                Post post = new Post(id, topic, body, dateTime, user);
+                return post;
+            } else {
+                return null;
+            }
         } finally {
             connection.close();
         }

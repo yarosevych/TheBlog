@@ -41,13 +41,13 @@
 <h2>Add a post</h2>
 
     Nickname:<br>
-    <input type="text" width="600px" id="nickname"><br><br>
+    <input type="text" style="width: 15%;" id="nickname"><br><br>
     Topic:<br>
-    <input type="text" id="topic"><br><br>
+    <input type="text" style="width: 40%;" id="topic"><br><br>
     Text:<br>
-    <input type="text" id="body"><br><br>
+    <textarea style="width: 40%; height: 20%" id="body"></textarea><br><br>
 
-<button style="margin-left: 220px; width: 25%; height: 50px" onclick="addPost()">Add Post</button>
+<button style="width: 25%; height: 50px" onclick="addPost()">Add Post</button>
 
 </body>
 </html>

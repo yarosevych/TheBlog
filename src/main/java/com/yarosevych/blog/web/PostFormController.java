@@ -22,7 +22,7 @@ public class PostFormController {
     @Autowired
     PostService postService;
 
-    @RequestMapping("/postForm")
+    @RequestMapping("/newPost")
     public String displayPostForm(){
         return "postForm";
     }

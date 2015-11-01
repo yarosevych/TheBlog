@@ -20,4 +20,17 @@ public class JsonParser {
         }
         return parsedJson;
     }
+
+    public static Map<String, Object> parseAddComment(String json) {
+        Map<String, Object> parsedSjon = new HashMap<>();
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            parsedSjon.put("body", jsonObject.getString("body"));
+            parsedSjon.put("postId", jsonObject.getInt("postId"));
+            parsedSjon.put("nickname", jsonObject.getString("nickname"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return parsedSjon;
+    }
 }
