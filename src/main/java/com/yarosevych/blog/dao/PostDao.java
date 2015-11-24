@@ -88,7 +88,7 @@ public class PostDao {
                 String topic = resultSet.getString(2);
                 String body = resultSet.getString(3);
                 java.util.Date dateTime = resultSet.getTimestamp(4);
-                String nickname = (resultSet.getString(6));
+                String nickname = (resultSet.getString(5));
                 User user = new User(userId, nickname);
                 Post post = new Post(id, topic, body, dateTime, user);
                 posts.add(post);

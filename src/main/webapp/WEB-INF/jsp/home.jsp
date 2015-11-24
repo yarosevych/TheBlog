@@ -45,7 +45,7 @@
 <table id="postList">
     <tr style="font-size: large"></tr>
     <c:forEach var="post" items="${postList}">
-        <b><a href="/postId=${post.id}">${post.topic}</a></b> <i> written by <b>${post.user.nickname}</b> at ${post.postDateTime}</i><br>
+        <b><a href="/postId=${post.id}">${post.topic}</a></b> <i> written by <b><a href="/user=${post.user.id}">${post.user.nickname}</a></b> at ${post.postDateTime}</i><br>
         ${post.body}
         <br><br>
     </c:forEach>

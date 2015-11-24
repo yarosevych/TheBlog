@@ -1,5 +1,6 @@
 package com.yarosevych.blog.dao;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import com.yarosevych.blog.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,37 +25,28 @@ public class UserDao {
         connection.close();
     }
 
-    public User getOrCreateUser(String nickname) throws SQLException {
+//    TODO: 1. Switch to stored procedure in the whole class.
+    public User getUserById(Integer id) throws SQLException {
         Connection connection = dataSource.getConnection();
         try {
-            CallableStatement callableStatement = connection.prepareCall("CALL createOrGetUser(?)");
-            callableStatement.setString(1, nickname);
-            ResultSet resultSet = callableStatement.executeQuery();
-            User user = new User();
-            if (resultSet.next()) {
-                user.setId(resultSet.getInt(1));
-                user.setNickname(nickname);
-            }
-            return user;
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT * FROM users WHERE id=?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            Integer userId = resultSet.getInt(1);
+            String nickname = resultSet.getString(2);
+            return new User(userId, nickname);
         } finally {
             connection.close();
         }
-    }
 
 
-    public User getUserById(Integer id) throws SQLException {
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT * FROM users WHERE id=?");
-        preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-            connection.close();
-        return new User(resultSet.getInt(1), resultSet.getString(2));
     }
 
     public List<User> getAllUsers() throws SQLException {
         Connection connection = dataSource.getConnection();
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT * FROM users");
         ResultSet resultSet = preparedStatement.executeQuery();

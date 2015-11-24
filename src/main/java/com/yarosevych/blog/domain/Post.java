@@ -53,10 +53,6 @@ public class Post {
         return postDateTime;
     }
 
-    public void setPostDateTime(Date postDateTime) {
-        this.postDateTime = postDateTime;
-    }
-
     public User getUser() {
         return user;
     }

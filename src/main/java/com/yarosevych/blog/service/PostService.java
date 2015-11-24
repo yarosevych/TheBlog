@@ -16,9 +16,6 @@ import java.util.Map;
 public class PostService {
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
     private PostDao postDao;
 
     public static final String NICKNAME = "nickname";

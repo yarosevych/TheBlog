@@ -17,7 +17,6 @@ import java.nio.charset.Charset;
 import java.sql.SQLException;
 
 import static com.yarosevych.blog.util.JsonParser.parseAddComment;
-import static com.yarosevych.blog.util.JsonParser.parseAddPost;
 
 @Controller
 public class PostController {
@@ -37,13 +36,13 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value="/deleteComment/{commentId}")
-    public String deletePost(@PathVariable("commentId") Integer commentId) throws SQLException {
+    public String deleteComment(@PathVariable("commentId") Integer commentId) throws SQLException {
         commentService.deleteComment(commentId);
         return "home";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addComment/add")
-    public String addPost(HttpServletRequest request) throws IOException, SQLException {
+    public String addComment(HttpServletRequest request) throws IOException, SQLException {
         String json = IOUtils.toString(request.getInputStream(), Charset.forName("UTF-8"));
         commentService.addComment(parseAddComment(json));
         return "home";

@@ -17,8 +17,6 @@ public class CommentService {
     @Autowired
     CommentDao commentDao;
 
-
-
     public static final String BODY = "body";
     public static final String POST_ID = "postId";
     public static final String NICKNAME = "nickname";

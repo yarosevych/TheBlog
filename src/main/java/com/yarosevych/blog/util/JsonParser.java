@@ -22,15 +22,15 @@ public class JsonParser {
     }
 
     public static Map<String, Object> parseAddComment(String json) {
-        Map<String, Object> parsedSjon = new HashMap<>();
+        Map<String, Object> parsedJson = new HashMap<>();
         try {
             JSONObject jsonObject = new JSONObject(json);
-            parsedSjon.put("body", jsonObject.getString("body"));
-            parsedSjon.put("postId", jsonObject.getInt("postId"));
-            parsedSjon.put("nickname", jsonObject.getString("nickname"));
+            parsedJson.put("body", jsonObject.getString("body"));
+            parsedJson.put("postId", jsonObject.getInt("postId"));
+            parsedJson.put("nickname", jsonObject.getString("nickname"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return parsedSjon;
+        return parsedJson;
     }
 }

@@ -23,13 +23,7 @@ public class HomeController {
     @RequestMapping("/")
     public String getAllPosts(Map<String, Object> map) throws SQLException{
         List<Post> posts= postService.getAllPosts();
-        List<Post> escapedPosts = new ArrayList<>();
-        for(Post post : posts) {
-            post.setTopic(HtmlUtils.htmlEscape(post.getTopic()));
-            post.setBody(HtmlUtils.htmlEscape(post.getBody()));
-            escapedPosts.add(post);
-        }
-        map.put("postList", escapedPosts);
+        map.put("postList", posts);
         map.put("post", new Post());
         return "home";
     }
