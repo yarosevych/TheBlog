@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class JsonParser {
 
-    public static Map<String, String> parseAddPost(String json) {
+    public static Map<String, String> parsePost(String json) {
         Map<String, String> parsedJson = new HashMap<>();
         try {
             JSONObject jsonObject = new JSONObject(json);
@@ -21,7 +21,7 @@ public class JsonParser {
         return parsedJson;
     }
 
-    public static Map<String, Object> parseAddComment(String json) {
+    public static Map<String, Object> parseComment(String json) {
         Map<String, Object> parsedJson = new HashMap<>();
         try {
             JSONObject jsonObject = new JSONObject(json);

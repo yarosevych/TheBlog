@@ -5,7 +5,8 @@ public class User {
     private Integer id;
     private String nickname;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String nickname) {
         this.nickname = nickname;

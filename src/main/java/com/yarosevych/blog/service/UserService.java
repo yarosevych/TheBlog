@@ -4,6 +4,7 @@ import com.yarosevych.blog.dao.UserDao;
 import com.yarosevych.blog.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +16,7 @@ public class UserService {
     private UserDao userDao;
 
     public void addUser(String nickname) throws SQLException {
-        userDao.addUser(nickname);
+        userDao.addUser(HtmlUtils.htmlEscape(nickname));
     }
 
     public User getUserById(Integer id) throws SQLException {

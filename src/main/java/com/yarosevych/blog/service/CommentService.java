@@ -15,7 +15,7 @@ import java.util.Map;
 public class CommentService {
 
     @Autowired
-    CommentDao commentDao;
+    private CommentDao commentDao;
 
     public static final String BODY = "body";
     public static final String POST_ID = "postId";
@@ -25,8 +25,8 @@ public class CommentService {
         return commentDao.getAllComments(postId);
     }
 
-    public void addComment(Map <String, Object> parsedComment) throws SQLException {
-        User user = new User((String)parsedComment.get(NICKNAME));
+    public void addComment(Map<String, Object> parsedComment) throws SQLException {
+        User user = new User((String) parsedComment.get(NICKNAME));
         Comment comment = new Comment();
         comment.setText(HtmlUtils.htmlEscape((String) parsedComment.get(BODY)));
         comment.setPostId((Integer) parsedComment.get(POST_ID));

@@ -1,6 +1,7 @@
 package com.yarosevych.blog.web;
 
 import com.yarosevych.blog.domain.Post;
+import com.yarosevych.blog.domain.User;
 import com.yarosevych.blog.service.PostService;
 import com.yarosevych.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class UserController {
 
     @Autowired
-    PostService postService;
+    private PostService postService;
 
     @Autowired
     UserService userService;
@@ -27,5 +29,12 @@ public class UserController {
         model.addAttribute("posts", postService.getPostsByUser(userId));
         model.addAttribute("post", new Post());
         return "user";
+    }
+
+    @RequestMapping("/users")
+    public String getAllUsers(Model model) throws SQLException {
+        List<User> users = userService.getallUsers();
+        model.addAttribute("users", users);
+        return "users";
     }
 }

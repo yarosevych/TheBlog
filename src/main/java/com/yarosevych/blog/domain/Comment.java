@@ -9,7 +9,8 @@ public class Comment {
     private Integer postId;
     private User user;
 
-    public Comment(){}
+    public Comment() {
+    }
 
     public Comment(Integer id, String text, Date commentDateTime, Integer postId, User user) {
         this.id = id;

@@ -1,6 +1,5 @@
 package com.yarosevych.blog.web;
 
-import com.yarosevych.blog.domain.Comment;
 import com.yarosevych.blog.service.CommentService;
 import com.yarosevych.blog.service.PostService;
 import org.apache.commons.io.IOUtils;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.sql.SQLException;
 
-import static com.yarosevych.blog.util.JsonParser.parseAddComment;
+import static com.yarosevych.blog.util.JsonParser.parseComment;
 
 @Controller
 public class PostController {
@@ -27,15 +26,14 @@ public class PostController {
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(method = RequestMethod.GET, value="/postId={postId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/postId={postId}")
     public String showPost(@PathVariable("postId") Integer postId, Model model) throws SQLException {
         model.addAttribute("post", postService.getPost(postId));
         model.addAttribute("commentsList", commentService.getAllComments(postId));
-        model.addAttribute("comment", new Comment());
         return "post";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value="/deleteComment/{commentId}")
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteComment/{commentId}")
     public String deleteComment(@PathVariable("commentId") Integer commentId) throws SQLException {
         commentService.deleteComment(commentId);
         return "home";
@@ -44,7 +42,7 @@ public class PostController {
     @RequestMapping(method = RequestMethod.POST, value = "/addComment/add")
     public String addComment(HttpServletRequest request) throws IOException, SQLException {
         String json = IOUtils.toString(request.getInputStream(), Charset.forName("UTF-8"));
-        commentService.addComment(parseAddComment(json));
+        commentService.addComment(parseComment(json));
         return "home";
     }
 }

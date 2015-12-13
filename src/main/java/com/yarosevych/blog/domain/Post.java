@@ -9,7 +9,8 @@ public class Post {
     private Date postDateTime;
     private User user;
 
-    public Post(){}
+    public Post() {
+    }
 
     public Post(String topic, String body, User user) {
         this.topic = topic;

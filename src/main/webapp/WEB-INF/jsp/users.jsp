@@ -5,15 +5,14 @@
 
 <html>
 <head>
-    <title>All Posts by ${user.nickname}</title>
+    <title>Users List</title>
 
-    <h1>All Posts by ${user.nickname}</h1>
+    <h1>Users List</h1>
 </head>
 
 <body>
-<c:forEach var="post" items="${posts}">
-    <b><a href="/postId=${post.id}">${post.topic}</a></b> <i> by ${user.nickname}</i><br>
-    ${post.body}
+<c:forEach var="user" items="${users}">
+    <b><a href="/user=${user.id}">${user.nickname}</a><br>
     <br><br>
 </c:forEach>
 </body>

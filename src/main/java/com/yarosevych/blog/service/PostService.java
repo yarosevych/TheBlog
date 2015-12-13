@@ -1,7 +1,6 @@
 package com.yarosevych.blog.service;
 
 import com.yarosevych.blog.dao.PostDao;
-import com.yarosevych.blog.dao.UserDao;
 import com.yarosevych.blog.domain.Post;
 import com.yarosevych.blog.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;

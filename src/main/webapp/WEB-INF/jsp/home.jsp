@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -16,7 +16,7 @@
             });
         });
 
-        function addPost(){
+        function addPost() {
             var topic;
             var body;
             var nickname;
@@ -45,7 +45,8 @@
 <table id="postList">
     <tr style="font-size: large"></tr>
     <c:forEach var="post" items="${postList}">
-        <b><a href="/postId=${post.id}">${post.topic}</a></b> <i> written by <b><a href="/user=${post.user.id}">${post.user.nickname}</a></b> at ${post.postDateTime}</i><br>
+        <b><a href="/postId=${post.id}">${post.topic}</a></b> <i> written by <b><a
+            href="/user=${post.user.id}">${post.user.nickname}</a></b> at ${post.postDateTime}</i><br>
         ${post.body}
         <br><br>
     </c:forEach>

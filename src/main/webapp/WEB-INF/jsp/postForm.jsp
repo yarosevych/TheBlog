@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -15,7 +15,7 @@
             });
         });
 
-        function addPost(){
+        function addPost() {
             var topic;
             var body;
             var nickname;
@@ -40,12 +40,12 @@
 <body>
 <h2>Add a post</h2>
 
-    Nickname:<br>
-    <input type="text" style="width: 15%;" id="nickname"><br><br>
-    Topic:<br>
-    <input type="text" style="width: 40%;" id="topic"><br><br>
-    Text:<br>
-    <textarea style="width: 40%; height: 20%" id="body"></textarea><br><br>
+Nickname:<br>
+<input type="text" style="width: 15%;" id="nickname"><br><br>
+Topic:<br>
+<input type="text" style="width: 40%;" id="topic"><br><br>
+Text:<br>
+<textarea style="width: 40%; height: 20%" id="body"></textarea><br><br>
 
 <button style="width: 25%; height: 50px" onclick="addPost()">Add Post</button>
 
